@@ -12,3 +12,8 @@ A simple pomodoro app that helps to maintain focus and increase productivity. Im
 ## TechStack
 
 Made using swiftUI
+
+## Screen Video
+
+https://github.com/user-attachments/assets/0503d987-8645-4064-9705-42538e92336e
+
