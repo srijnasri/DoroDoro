@@ -10,11 +10,33 @@ import SwiftUI
 struct ContentView: View {
     @State var timerString: String
     @State var buttonType: ButtonState = .start
-    @State var remainingSeconds = 25 * 60
     @State var timer: Timer?
+    @State var timerState: TimerState = .work
+    @State var isToggleOn : Bool = true
+    @State var remainingSeconds = 25 * 60
     
+    // on basis of toggle we are trying to update the view
     var body: some View {
-        VStack {
+        VStack(spacing: 20) {
+            Toggle(isOn: $isToggleOn) {
+                Label(timerState.rawValue, systemImage: timerState.toggleImage)
+                    .font(.system(size: 30, weight: .bold))
+                    .foregroundStyle(.black)
+            }
+            .toggleStyle(.button)
+            .onChange(of: isToggleOn) { oldValue, newValue in
+                if oldValue {
+                    // meaning work
+                    timerState = .break
+                    remainingSeconds = 5 * 60
+                    timerString = formatTime(seconds: remainingSeconds)
+                } else {
+                    // meaning break
+                    timerState = .work
+                    remainingSeconds = 25 * 60
+                    timerString = formatTime(seconds: remainingSeconds)
+                }
+            }
             Text(timerString)
                 .fontWeight(.bold)
                 .font(.system(size: 40))
@@ -63,7 +85,7 @@ struct ContentView: View {
     func resetTimer() {
         timer?.invalidate()
         buttonType = .start
-        remainingSeconds = 25 * 60
+        remainingSeconds = isToggleOn ? 25 * 60 : 5 * 60
         timerString = formatTime(seconds: remainingSeconds)
     }
     
@@ -77,6 +99,30 @@ struct ContentView: View {
 enum ButtonState: String {
     case start
     case pause
+}
+
+enum TimerState: String {
+    case work
+    case `break`
+    
+    var toggleImage: String {
+        switch self {
+        case .work:
+            "desktopcomputer"
+        case .break:
+            "zzz"
+        }
+    }
+    
+//    var remainingSeconds: Double {
+//        switch self {
+//        case .work:
+//            25 * 60
+//        case .break:
+//            5 * 60
+//        }
+//    }
+//    case longBreak = "long break"
 }
 
 #Preview {
