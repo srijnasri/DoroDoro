@@ -7,12 +7,12 @@ A simple pomodoro app that helps to maintain focus and increase productivity. Im
 - Start focus timer
 - Pause focus timer
 - Reset focus timer
-- two modes for work and break
+- Two modes for work and break
 - Background music for focus
 
 ## TechStack
 
-Made using swiftUI
+Made using swiftUI, AVKit.
 
 ## Screen Video
 
