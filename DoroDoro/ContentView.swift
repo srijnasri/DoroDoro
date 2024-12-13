@@ -23,7 +23,7 @@ struct ContentView: View {
             Toggle(isOn: $isToggleOn) {
                 Label(timerState.rawValue, systemImage: timerState.toggleImage)
                     .font(.system(size: 30, weight: .bold))
-                    .foregroundStyle(.black)
+                    .foregroundStyle(.primary)
             }
             .toggleStyle(.button)
             // on basis of toggle we are trying to update the view
@@ -54,15 +54,14 @@ struct ContentView: View {
                     }
                 })
                 .font(.system(size: 20))
-                .foregroundStyle(.black)
                 .padding()
-                .background(.gray, in: .capsule)
+                .background(.ultraThickMaterial, in: .capsule)
                 Button {
                     resetTimer()
                 } label: {
                     Image(systemName: "arrow.clockwise")
                         .font(.system(size: 30, weight: .bold))
-                        .foregroundStyle(.black)
+                        .foregroundStyle(.pink)
                 }
             }
         }
@@ -77,7 +76,6 @@ struct ContentView: View {
             if remainingSeconds == 0 {
                 resetTimer()
                 // insert complete focus time celebration logic
-                stopMusic()
                 playAudio(musicType: .finish, onRepeat: false)
             }
         }
@@ -89,6 +87,7 @@ struct ContentView: View {
     }
     
     func resetTimer() {
+        stopMusic()
         timer?.invalidate()
         buttonType = .start
         remainingSeconds = timerState.remainingSeconds
