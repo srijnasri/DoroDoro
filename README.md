@@ -8,6 +8,7 @@ A simple pomodoro app that helps to maintain focus and increase productivity. Im
 - Pause focus timer
 - Reset focus timer
 - two modes for work and break
+- Background music for focus
 
 ## TechStack
 
